@@ -29,7 +29,9 @@ void ResourceLoader::notifyObservers() const {
     }
 }
 
-void ResourceLoader::ReadFile(std::ifstream ReadFile) {
+void ResourceLoader::ReadFile(wxString p) {
+    std::string path=std::string(p);
+    std::ifstream ReadFile(path);
     std::string myText;
     std::ofstream WriteFile("prova_caricata.txt");
     while(getline(ReadFile, myText)){

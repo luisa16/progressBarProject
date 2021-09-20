@@ -9,25 +9,26 @@
 #include <list>
 #include <algorithm>
 #include<fstream>
+#include "wxFrame.h"
 
 
 class ResourceLoader:Subject {
 
 public:
-
     void registerObserver(Observer *o) override;
 
     void removeObserver(Observer *o)override;
 
     void notifyObservers() const override;
 
-    void ReadFile(std::ifstream ReadFile);
+    void ReadFile(wxString p);
 
 
 
 
 private:
     std::list<Observer> observers;
+
 };
 
 

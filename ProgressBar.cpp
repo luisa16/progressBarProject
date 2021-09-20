@@ -9,5 +9,5 @@ int ProgressBar::getId() const {
 }
 
 void ProgressBar::update() {
-
+    std::cout<<"file opened"
 }
