@@ -6,8 +6,9 @@
 #define PROGRESSBARPROJECT_RESOURCELOADER_H
 #include "Subject.h"
 #include "Observer.h"
-#include <vector>
+#include <list>
 #include <algorithm>
+#include<fstream>
 
 
 class ResourceLoader:Subject {
@@ -20,10 +21,13 @@ public:
 
     void notifyObservers() const override;
 
+    void ReadFile(std::ifstream ReadFile);
+
+
 
 
 private:
-    std::vector<Observer> observers;
+    std::list<Observer> observers;
 };
 
 

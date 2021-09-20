@@ -14,7 +14,7 @@ private:
     int id;
 public:
     int getId() const;
-    void update() override;
+    void update();
 };
 
 
