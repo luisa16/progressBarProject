@@ -27,8 +27,9 @@ public:
 private:
     std::list<Observer*> observers;
     bool selected=false;
-    int fileSize=0;
+    int fileSize;
 public:
+    void setFileSize(int s);
     int getFileSize() const;
 
 };

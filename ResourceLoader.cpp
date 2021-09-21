@@ -22,14 +22,12 @@ void ResourceLoader::notifyObservers() {
 }
 
 void ResourceLoader::ReadFile(const wxString& p) {
-    selected=true;
-    hasSelected();
     std::string path=std::string(p);
     std::ifstream ReadFile(path, std::ios::binary | std::ios::ate);
-    fileSize=ReadFile.tellg();
+    setFileSize(static_cast<int>(ReadFile.tellg()));
+    selected=true;
+    hasSelected();
     std::ifstream readFile(path);
-    wxMessageBox(std::to_string(fileSize),
-                  "About progress bar project", wxOK | wxICON_INFORMATION );
     std::string myText;
     std::ofstream WriteFile("prova2.txt");
     while(getline(readFile, myText)){
@@ -53,4 +51,8 @@ bool ResourceLoader::getSelected() const {
 
 int ResourceLoader::getFileSize() const {
     return fileSize;
+}
+
+void ResourceLoader::setFileSize(int s) {
+    this->fileSize=s;
 }
