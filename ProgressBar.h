@@ -1,20 +1,24 @@
-//
-// Created by luisa on 20/09/21.
-//
-
 #ifndef PROGRESSBARPROJECT_PROGRESSBAR_H
 #define PROGRESSBARPROJECT_PROGRESSBAR_H
 
 
 #include "Observer.h"
+#include "ResourceLoader.h"
 
-class ProgressBar: Observer {
+class ProgressBar: public Observer {
+
+
+public:
+    ProgressBar(ResourceLoader *rl);
+    void update()override;
+    void attach() override;
+    void detach() override;
+
+    virtual ~ProgressBar();
 
 private:
-    int id;
-public:
-    int getId() const;
-    void update();
+    ResourceLoader* rs;
+
 };
 
 

@@ -1,16 +1,14 @@
-//
-// Created by luisa on 20/09/21.
-//
-
 #ifndef PROGRESSBARPROJECT_OBSERVER_H
 #define PROGRESSBARPROJECT_OBSERVER_H
 
-
 class Observer {
-protected:
-    virtual ~Observer(){};
+
 public:
-    virtual void update() const =0;
+    virtual ~Observer(){};
+
+    virtual void update() = 0;
+    virtual void attach() = 0;
+    virtual void detach() = 0;
 
 };
 

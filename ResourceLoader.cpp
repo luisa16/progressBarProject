@@ -1,42 +1,56 @@
-//
-// Created by luisa on 20/09/21.
-//
-
 #include "ResourceLoader.h"
 #include "Observer.h"
-#include <list>
-#include <algorithm>
 #include <fstream>
 #include <string>
 
 void ResourceLoader::registerObserver(Observer *o)  {
     if(o != nullptr) {
-        observers.push_back(*o);
+        observers.push_back(o);
     }
 }
 
 void ResourceLoader::removeObserver(Observer *o)  {
     if (o!= nullptr){
-        std::list<Observer>::iterator it;
-        it = find(observers.begin(), observers.end(), *o);
-        observers.erase(it);
+        observers.remove(o);
     }
 }
 
-void ResourceLoader::notifyObservers() const {
-    for(auto itr=observers.begin(); itr!=observers.end(); ++itr){
-        (*itr).update();
+void ResourceLoader::notifyObservers() {
+    for(auto & observer : observers){
+        observer->update();
     }
 }
 
-void ResourceLoader::ReadFile(wxString p) {
+void ResourceLoader::ReadFile(const wxString& p) {
+    selected=true;
+    hasSelected();
     std::string path=std::string(p);
-    std::ifstream ReadFile(path);
+    std::ifstream ReadFile(path, std::ios::binary | std::ios::ate);
+    fileSize=ReadFile.tellg();
+    std::ifstream readFile(path);
+    wxMessageBox(std::to_string(fileSize),
+                  "About progress bar project", wxOK | wxICON_INFORMATION );
     std::string myText;
-    std::ofstream WriteFile("prova_caricata.txt");
-    while(getline(ReadFile, myText)){
+    std::ofstream WriteFile("prova2.txt");
+    while(getline(readFile, myText)){
         WriteFile<<myText;
         WriteFile<<"\n";
     }
-    ReadFile.close();
+    selected=false;
+    readFile.close();
+}
+
+void ResourceLoader::hasSelected() {
+    if(selected){
+        notifyObservers();
+
+    }
+}
+
+bool ResourceLoader::getSelected() const {
+    return selected;
+}
+
+int ResourceLoader::getFileSize() const {
+    return fileSize;
 }

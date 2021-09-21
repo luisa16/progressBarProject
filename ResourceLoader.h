@@ -1,7 +1,3 @@
-//
-// Created by luisa on 20/09/21.
-//
-
 #ifndef PROGRESSBARPROJECT_RESOURCELOADER_H
 #define PROGRESSBARPROJECT_RESOURCELOADER_H
 #include "Subject.h"
@@ -9,25 +5,31 @@
 #include <list>
 #include <algorithm>
 #include<fstream>
-#include "wxFrame.h"
+#include "MyFrame.h"
 
 
-class ResourceLoader:Subject {
+class ResourceLoader: public Subject {
 
 public:
     void registerObserver(Observer *o) override;
 
-    void removeObserver(Observer *o)override;
+    void removeObserver(Observer *o) override;
 
-    void notifyObservers() const override;
+    void notifyObservers() override;
 
-    void ReadFile(wxString p);
+    void ReadFile(const wxString& p);
+    void hasSelected();
+    bool getSelected() const;
 
 
 
 
 private:
-    std::list<Observer> observers;
+    std::list<Observer*> observers;
+    bool selected=false;
+    int fileSize=0;
+public:
+    int getFileSize() const;
 
 };
 
