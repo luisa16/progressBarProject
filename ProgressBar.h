@@ -5,19 +5,26 @@
 #include "Observer.h"
 #include "ResourceLoader.h"
 
-class ProgressBar: public Observer {
+class ProgressBar : public Observer {
 
 
 public:
     ProgressBar(ResourceLoader *rl);
-    void update()override;
+
+    void update() override;
+
     void attach() override;
+
     void detach() override;
+
+    bool isNotifyReceived() const;
 
     virtual ~ProgressBar();
 
 private:
-    ResourceLoader* rs;
+    ResourceLoader *rs;
+    bool notifyReceived=false;
+
 
 };
 
