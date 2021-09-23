@@ -15,7 +15,16 @@ TEST(ProgressBar, TestAttachDettach){
 TEST(ProgressBar, TestUpdate){
     ResourceLoader rs;
     auto pr=new ProgressBar(&rs);
-    rs.ReadFile("/home/luisa/Documenti/prova2.txt");
+    std::string p="/home/luisa/Documenti/prova2.txt";
+    rs.notifyObservers();
+    ASSERT_TRUE(rs.isNotified());
     ASSERT_TRUE(pr->isUpdated());
 }
+
+/*TEST(ProgressBar, TestUpdate){
+    ResourceLoader rs;
+    auto pr=new ProgressBar(&rs);
+    rs.ReadFile("/home/luisa/Documenti/prova2.txt");
+    ASSERT_TRUE(pr->isUpdated());
+}*/
 
