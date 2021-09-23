@@ -46,8 +46,6 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     SetMenuBar(menuBar);
     CreateStatusBar();
     SetStatusText("Welcome to file loader!");
-
-
 }
 
 void MyFrame::OnExit(wxCommandEvent &event) {
@@ -66,7 +64,6 @@ void MyFrame::OnOpen(wxCommandEvent &event) {
         auto rs = new ResourceLoader();
         auto pr = new ProgressBar(rs);
         rs->ReadFile(static_cast<const wxString &> (selectedFile));
-
     }
     fileDialog->Destroy();
 }

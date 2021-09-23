@@ -19,44 +19,25 @@ void ResourceLoader::removeObserver(Observer *o) {
 void ResourceLoader::notifyObservers() {
     for (auto &observer: observers) {
         observer->update();
-        notified=true;
     }
 }
 
-std::fstream ResourceLoader::ReadFile(const wxString &p) {
-    /*wxString fileName=wxFileNameFromPath(p);
-    auto* wxFile=new wxFileStream(p);*/
+std::fstream ResourceLoader::ReadFile(const wxString &p){
     fileName = basename(p);
     std::string path = std::string(p);
     std::ifstream ReadFile(path, std::ios::binary | std::ios::ate);
     setFileSize(static_cast<int>(ReadFile.tellg()));
-    selected = true;
-    hasSelected();
+    notifyObservers();
+    notified= true;
     std::fstream readFile(path);
     std::string myText;
-    std::fstream WriteFile("prova2.txt", std::fstream::out);
+    std::fstream WriteFile(fileName, std::fstream::out);
     while (getline(readFile, myText)) {
         WriteFile << myText;
         WriteFile << "\n";
     }
-    selected = false;
     readFile.close();
     return WriteFile;
-}
-
-void ResourceLoader::setSelected(bool selected) {
-    ResourceLoader::selected = selected;
-}
-
-void ResourceLoader::hasSelected() {
-    if (selected) {
-        notifyObservers();
-
-    }
-}
-
-bool ResourceLoader::getSelected() const {
-    return selected;
 }
 
 int ResourceLoader::getFileSize() const {
@@ -67,12 +48,8 @@ void ResourceLoader::setFileSize(int s) {
     this->fileSize = s;
 }
 
-std::string &ResourceLoader::getFileName() {
+const std::string &ResourceLoader::getFileName()const {
     return fileName;
-}
-
-const std::list<Observer *> &ResourceLoader::getObservers() const {
-    return observers;
 }
 
 bool ResourceLoader::isNotified() const {

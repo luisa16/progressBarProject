@@ -7,19 +7,15 @@
 
 class ProgressBar : public Observer {
 
-
 public:
     ProgressBar(ResourceLoader *rl);
+    virtual ~ProgressBar();
 
     void update() override;
-
     void attach() override;
-
     void detach() override;
 
     bool isUpdated() const;
-
-    virtual ~ProgressBar();
 
 private:
     ResourceLoader *rs;
