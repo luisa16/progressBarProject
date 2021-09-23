@@ -68,7 +68,6 @@ void MyFrame::OnOpen(wxCommandEvent &event) {
         rs->ReadFile(static_cast<const wxString &> (selectedFile));
 
     }
-
     fileDialog->Destroy();
 }
 

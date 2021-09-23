@@ -6,8 +6,8 @@
 
 
 void ProgressBar::update() {
+    updated=true;
     if (rs->getSelected()) {
-        updated=true;
         int i;
         int max = rs->getFileSize();
         //MyFrame *frame = new MyFrame("Progress bar", wxPoint(50, 50), wxSize(450, 340));
@@ -16,7 +16,7 @@ void ProgressBar::update() {
 
         wxProgressDialog *dialog = new wxProgressDialog(wxT("Wait..."), wxT("Keep waiting..."), max, wxF,wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
-        for (i = 0; i < max; i++) {
+        for (i = 0; i < max; i+=5) {
             wxMilliSleep(2);
             dialog->Update(i);
         }
