@@ -6,6 +6,6 @@ find_package(wxWidgets REQUIRED net gl core base)
 include(${wxWidgets_USE_FILE})
 
 
-set(SOURCE_FILES runAllTests.cpp ProgressBarTest.cpp ResourceLoaderTests.cpp)
+set(SOURCE_FILES runAllTests.cpp ResourceLoaderTest.cpp ProgressBarTest.cpp )
 add_executable(runProgressBarTests ${SOURCE_FILES})
 target_link_libraries(runProgressBarTests ${GTEST_BOTH_LIBRARIES} ${wxWidgets_LIBRARIES} core)
