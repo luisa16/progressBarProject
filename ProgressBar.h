@@ -17,13 +17,13 @@ public:
 
     void detach() override;
 
-    bool isNotifyReceived() const;
+    bool isUpdated() const;
 
     virtual ~ProgressBar();
 
 private:
     ResourceLoader *rs;
-    bool notifyReceived=false;
+    bool updated=false;
 
 
 };

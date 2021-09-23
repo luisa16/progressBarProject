@@ -44,6 +44,10 @@ std::fstream ResourceLoader::ReadFile(const wxString &p) {
     return WriteFile;
 }
 
+void ResourceLoader::setSelected(bool selected) {
+    ResourceLoader::selected = selected;
+}
+
 void ResourceLoader::hasSelected() {
     if (selected) {
         notifyObservers();

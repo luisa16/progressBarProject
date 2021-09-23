@@ -47,6 +47,8 @@ private:
 public:
     bool isNotified() const;
 
+    void setSelected(bool selected);
+
 
 };
 

@@ -6,16 +6,15 @@
 
 
 void ProgressBar::update() {
-    notifyReceived=true;
     if (rs->getSelected()) {
+        updated=true;
         int i;
         int max = rs->getFileSize();
         //MyFrame *frame = new MyFrame("Progress bar", wxPoint(50, 50), wxSize(450, 340));
         wxWindow *wxF = wxFrame::FindWindowById(2);
         //frame->Show(true);
 
-        wxProgressDialog *dialog = new wxProgressDialog(wxT("Wait..."), wxT("Keep waiting..."), max, wxF,
-                                                        wxPD_APP_MODAL | wxPD_AUTO_HIDE);
+        wxProgressDialog *dialog = new wxProgressDialog(wxT("Wait..."), wxT("Keep waiting..."), max, wxF,wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
         for (i = 0; i < max; i++) {
             wxMilliSleep(2);
@@ -26,6 +25,7 @@ void ProgressBar::update() {
         delete dialog;
         wxMessageBox(rs->getFileName().append(" uploded!"),
                      "Upload result", wxOK | wxICON_INFORMATION);
+
     }
 }
 
@@ -46,7 +46,7 @@ ProgressBar::~ProgressBar() {
     detach();
 }
 
-bool ProgressBar::isNotifyReceived() const {
-    return notifyReceived;
+bool ProgressBar::isUpdated() const {
+    return updated;
 }
 
